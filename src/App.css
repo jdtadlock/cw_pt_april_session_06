@@ -1,3 +1,6 @@
-h1 {
-  /* background: red; */
+.image {
+  background-size: cover;
+  background-position: center;
+  width: 250px;
+  height: 200px;
 }

@@ -3,3 +3,8 @@ body {
   padding: 25px 5%;
   font-family: sans-serif;
 }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}

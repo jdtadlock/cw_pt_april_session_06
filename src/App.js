@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
 import './App.css';
 
+import axios from 'axios';
+import config from './config';
+
+//3K2ZmyEMrXGGyR7EGBGnbti1HZNk2TZL
 class App extends Component {
   constructor() {
     super();
 
     this.state = {
-      title: 'Our App Changed'
+      title: 'Our App Changed',
+      gifs: []
     };
+  }
+
+  componentDidMount = () => {
+    axios.get(`https://api.giphy.com/v1/gifs/search?api_key=${config.api_key}&q=batman`)
+      .then(res => {
+        this.setState({
+          gifs: [...res.data.data]
+        });
+      });
   }
 
   changeTitle = () => {
@@ -31,6 +45,14 @@ class App extends Component {
         <input type="text" onChange={this.handleChange} value={this.state.title} />
 
         <button onClick={this.changeTitle}>Change Title</button>
+
+        <h1>Gifs</h1>
+
+        <div className="row">
+          {this.state.gifs.map(gif => (
+            <div key={gif.id} className="image" style={{ backgroundImage: `url(${gif.images.downsized.url})` }}></div>
+          ))}
+        </div>
       </div>
     );
   }
